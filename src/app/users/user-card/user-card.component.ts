@@ -6,7 +6,8 @@ import { User } from "src/core/interfaces/user"
     template: `
         <article>
             <header> {{ user.name }} </header>
-            {{ user.email }}
+            email: {{ user.email }} <br>
+            city : {{ user.address.city }}
             <footer></footer>
         </article>
     `

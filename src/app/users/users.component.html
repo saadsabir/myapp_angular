@@ -1,2 +1,8 @@
-<h2>Users</h2>
+<h2>{{ 'Utilisateur' | plural:nbSelected }}</h2>
+<select [(ngModel)]="nbSelected">
+    <option>0</option>
+    <option>1</option>
+    <option>2</option>
+</select>
+
 <app-user-card *ngFor="let u of users" [user]="u" />

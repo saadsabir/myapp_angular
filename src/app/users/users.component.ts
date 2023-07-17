@@ -5,6 +5,7 @@ import { User } from "src/core/interfaces/user";
     templateUrl: 'users.component.html'
 })
 export class UsersComponent{
+    nbSelected: number = 0
     users: User[] = [
         {
           "id": 1,
