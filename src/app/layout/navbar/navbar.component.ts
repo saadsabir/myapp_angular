@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
+import { AppService } from "src/app/core/services/app.service";
 @Component({
     selector: 'app-navbar',
     template: `
@@ -7,10 +8,16 @@ import { Component } from "@angular/core";
         <button routerLink="/login">Se connecter</button>
     `
 })
-export class NavbarComponent{
-    title: string = 'Mon App'
+export class NavbarComponent implements OnInit {
+    title: string = ''
     name: string = 'ana'
+    price: number = 15
+    constructor(private appService: AppService) { }
 
+    ngOnInit() {
+        this.title = this.appService.getTitle()
+    }
+    
     listenSearch(username: string) {
         console.log(username)
     }
