@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, effect, signal } from "@angular/core";
-import { User } from "src/core/interfaces/user";
+import { User } from "src/app/core/interfaces/user";
 import { UserService } from "src/app/core/services/user.service";
 
 @Component({
@@ -11,7 +11,6 @@ export class UsersComponent implements OnInit {
   extSelected: string = ''
   extensions: string[] = ['tv', 'biz', 'io', 'me']
 
-  //users: User[] = []
   users = signal<User[]>([])
   usersExtensionBiz = computed(() => {
     return this.users().filter(user => user.email.endsWith('biz')).length
@@ -21,12 +20,11 @@ export class UsersComponent implements OnInit {
     effect(() => {
       console.log('signal !')
     })
-   }
+  }
 
   async ngOnInit(): Promise<void> {
     /*this.userService.getAll().then((users: User[]) => {
        this.users = users
-    })
     })*/
     //this.users = await this.userService.getAll()
     this.users.set(await this.userService.getAll())
@@ -37,16 +35,13 @@ export class UsersComponent implements OnInit {
       name: 'ana',
       email: 'ana@gmail.biz'
     }).subscribe((userCreated: User) => {
-       //this.users().push(userCreated)
-       //avec les signaux
-       this.users.set([ ...this.users(), userCreated ])
-       //sans signaux: 
-       // this.users = [ ...this.users(), userCreated ]
+      //this.users().push(userCreated)
+      this.users.set([ ...this.users(), userCreated ])
+      // this.users = [ ...this.users(), userCreated ]
     })
   }
 
   deleteUser(id: number) {
-    console.log(id)
     this.userService.delete(id).subscribe(() => {
       //const index = this.users().findIndex(user => user.id == id)
       //this.users().splice(index, 1)
