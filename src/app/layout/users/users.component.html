@@ -1,0 +1,11 @@
+<h2>{{ 'Utilisateur' | plural:nbSelected }}</h2>
+<select [(ngModel)]="nbSelected">
+    <option>0</option>
+    <option>1</option>
+    <option>2</option>
+</select>
+<select [(ngModel)]="extSelected">
+    <option value="">Tous</option>
+    <option *ngFor="let ext of extensions">{{ ext }}</option>
+</select>
+<app-user-card *ngFor="let u of users | extFilter:extSelected" [user]="u" />
