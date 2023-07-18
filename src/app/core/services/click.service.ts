@@ -19,7 +19,7 @@ export class ClickService {
             }, 300)
             setTimeout(() => {
                 subscriber.next('D')
-                //subscriber.complete()
+                subscriber.complete()
             }, 3000)
         })
     }

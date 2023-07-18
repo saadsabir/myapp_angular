@@ -9,12 +9,16 @@ import { User } from "src/core/interfaces/user"
             email: {{ user.email }} <br>
             city : {{ user.address.city }}
             <footer>
-                <button>{{ 'REMOVE' | lang:'en' }}</button>
+            <button (click)="removeUser()">{{ 'REMOVE' | lang:'en' }}</button>
             </footer>
         </article>
     `
 })
 
 export class UsercardComponent {
+    @Output() onDelete: EventEmitter<number> = new EventEmitter()
     @Input() user!: User
+    removeUser() {
+        this.onDelete.emit(this.user.id)
+    }
 }
