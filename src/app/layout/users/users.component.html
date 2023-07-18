@@ -1,15 +1,22 @@
-<h2>{{ 'Utilisateur' | plural:nbSelected }}</h2>
+<h1>{{ 'Utilisateur' | plural:nbSelected }}</h1>
+
 <select [(ngModel)]="nbSelected">
     <option>0</option>
     <option>1</option>
     <option>2</option>
 </select>
+
 <select [(ngModel)]="extSelected">
     <option value="">Tous</option>
     <option *ngFor="let ext of extensions">{{ ext }}</option>
 </select>
+
+<p>le nombre d'utilisateurs avec un email qui termine .biz: {{usersExtensionBiz()}} </p>
+
+<button (click)="createUser()">Créer un utilisateur</button>
+
 <app-user-card 
-*ngFor="let u of users() | extFilter:extSelected" 
-[user]="u" 
-(onDelete)="deleteUser($event)"
+    *ngFor="let u of users() | extFilter:extSelected" 
+    [user]="u" 
+    (onDelete)="deleteUser($event)"
 />

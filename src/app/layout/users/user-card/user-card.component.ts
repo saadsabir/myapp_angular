@@ -1,23 +1,22 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core"
-import { User } from "src/core/interfaces/user"
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { User } from "src/app/core/interfaces/user";
 
 @Component({
     selector: 'app-user-card',
     template: `
         <article>
-            <header> {{ user.name }} </header>
-            email: {{ user.email }} <br>
-            city : {{ user.address.city }}
+            <header>{{ user.name }}</header>
+            {{ user.email }}
             <footer>
-            <button (click)="removeUser()">{{ 'REMOVE' | lang:'en' }}</button>
+                <button (click)="removeUser()">{{ 'REMOVE' | lang:'en' }}</button>
             </footer>
         </article>
     `
 })
-
-export class UsercardComponent {
+export class UserCardComponent {
     @Output() onDelete: EventEmitter<number> = new EventEmitter()
-    @Input() user!: User
+    @Input() user: User = {} as User
+
     removeUser() {
         this.onDelete.emit(this.user.id)
     }
