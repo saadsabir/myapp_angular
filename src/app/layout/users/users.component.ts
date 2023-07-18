@@ -14,9 +14,11 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  ngOnInit(): void {
-    this.userService.getAll().subscribe((users: User[]) => {
-      this.users = users
-   })
+  async ngOnInit(): Promise<void> {
+    /*this.userService.getAll().then((users: User[]) => {
+       this.users = users
+    })
+    })*/
+    this.users = await this.userService.getAll()
   }
 }
