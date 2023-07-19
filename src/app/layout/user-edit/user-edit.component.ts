@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/core/interfaces/user';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -12,8 +13,17 @@ import { UserService } from 'src/app/core/services/user.service';
 export class UserEditComponent implements OnInit {
 
     user: User = {} as User
+    propName: FormControl = new FormControl()
+    loading: boolean = false
+    form: FormGroup = this.builder.group({
+        name: this.propName,
+        email: '',
+        username: ''
+    })
 
-    constructor(private route: ActivatedRoute, private userService: UserService) { }
+    constructor(private route: ActivatedRoute,
+        private userService: UserService,
+        private builder: FormBuilder) { }
 
     ngOnInit(): void {
         /*this.route.params.subscribe((paramsUrl: Params) => {
@@ -32,9 +42,18 @@ export class UserEditComponent implements OnInit {
                 })
             )
             .subscribe((user: User) => {
+                this.form.patchValue(user)
                 this.user = user
             })
-            //il faut detruire l'observable qui ne se termine pas type .interval
-            //ca ne sert a rien de se desinscrire d'une requete comme la dessus
+        //il faut detruire l'observable qui ne se termine pas ex : type .interval
+        //ca ne sert a rien de se desinscrire d'une requete comme la dessus
+    }
+
+    updateUser() {
+        this.userService
+        .update(this.user.id, this.form.value)
+        .subscribe((userModified: User) => {
+            this.user = userModified
+        })
     }
 }

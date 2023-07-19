@@ -11,7 +11,7 @@ type UserPayload = Omit<User, 'id'>
 export class UserService {
     readonly url: string = 'https://jsonplaceholder.typicode.com/users'
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getAll(): Promise<User[]> {
         /*return new Promise((resolve, reject) => {
@@ -28,8 +28,8 @@ export class UserService {
         return lastValueFrom(this.http.get<User[]>(this.url))
     }
 
-    get(id: number): Observable<User>{
-        return this.http.get<User>(this.url+'/'+id)
+    get(id: number): Observable<User> {
+        return this.http.get<User>(this.url + '/' + id)
     }
 
     create(payload: UserPayload): Observable<User> {
@@ -38,5 +38,9 @@ export class UserService {
 
     delete(id: number): Observable<void> {
         return this.http.delete<void>(this.url + '/' + id)
+    }
+
+    update(id: number, payload: UserPayload): Observable<User> {
+        return this.http.put<User>(this.url + '/' + id, payload)
     }
 }
