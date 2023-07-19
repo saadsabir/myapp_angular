@@ -1,5 +1,6 @@
 import { Component, OnInit, computed, effect, signal } from "@angular/core";
 import { User } from "src/app/core/interfaces/user";
+import { NgForm } from "@angular/forms";
 import { UserService } from "src/app/core/services/user.service";
 
 @Component({
@@ -10,6 +11,7 @@ export class UsersComponent implements OnInit {
   nbSelected: number = 0
   extSelected: string = ''
   extensions: string[] = ['tv', 'biz', 'io', 'me']
+  loading: boolean = false
 
   users = signal<User[]>([])
   usersExtensionBiz = computed(() => {
@@ -30,14 +32,15 @@ export class UsersComponent implements OnInit {
     this.users.set(await this.userService.getAll())
   }
 
-  createUser() {
-    this.userService.create({
-      name: 'ana',
-      email: 'ana@gmail.biz'
-    }).subscribe((userCreated: User) => {
+  createUser(form: NgForm) {
+    if (form.invalid) return
+    this.loading = true
+    this.userService.create(form.value).subscribe((userCreated: User) => {
       //this.users().push(userCreated)
       this.users.set([ ...this.users(), userCreated ])
       // this.users = [ ...this.users(), userCreated ]
+      this.loading = false
+      form.resetForm()
     })
   }
 

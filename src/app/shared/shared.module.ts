@@ -5,9 +5,8 @@ import { AutoCompletePipe } from "./pipes/autocomplete.pipe";
 import { ExtensionPipe } from "./pipes/extension.pipe";
 
 @NgModule({
-    declarations: [PluralPipe, LangPipe, AutoCompletePipe,ExtensionPipe],
+    declarations: [PluralPipe, LangPipe, AutoCompletePipe, ExtensionPipe],
     imports: [],
     exports: [PluralPipe, LangPipe, AutoCompletePipe, ExtensionPipe]
 })
-
-export class SharedModule{}
+export class SharedModule {}
