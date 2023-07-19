@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { UsersModule } from './users/users.module';
-
+import { UserEditModule } from './user-edit/user-edit.module';
+import { layoutRouter } from './layout.router';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { UsersModule } from './users/users.module';
   imports: [
     CommonModule,
     NavbarModule,
-    UsersModule
+    UsersModule,
+    UserEditModule,
+    layoutRouter
   ]
 })
 export class LayoutModule { }
