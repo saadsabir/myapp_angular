@@ -1,29 +1,22 @@
-<form (ngSubmit)="login(myform)" #myform="ngForm">
-
-    <div *ngIf="myform.invalid && myform.submitted">
-         Formulaire invalide
-         <div *ngIf="email.hasError('required')">
-            Email est requis
-         </div>
-         <div *ngIf="email.hasError('minlength')">
-             Vous avez mis {{ email.errors!['minlength'].actualLength }} caractères, 
-             {{ email.errors!['minlength'].requiredLength }} caractères requis
-         </div>
+<form (ngSubmit)="login()" [formGroup]="form"></form>
+<div *ngIf="form.invalid && submitted">
+    Formulaire invalide
+    <div *ngIf="propEmail.hasError('required')">
+        Email requis
     </div>
-
-    <div [ngClass]="{ red: myform.invalid, green: myform.valid }">
-        Un test
+    <div *ngIf="propEmail.hasError('minlength')">
+        caractères requis
     </div>
-
-    <div [ngStyle]="{ color: 'red', fontWeight: 'bold' }">
-        test 2
+    <div *ngIf="propEmail.hasError('domain')">
+        {{ propEmail.errors!['domain'] }} est interdit !
     </div>
+</div>
 
-    <label>Email</label>
-    <input type="text" name="email" ngModel #email="ngModel" required minlength="3">
+<label>Email</label>
+<input type="text" [formControl]="propEmail">
 
-    <label>Mot de passe</label>
-    <input type="password" name="password" ngModel>
+<label>Mot de passe</label>
+<input type="password" [formControl]="propPass">
 
-    <button>Connexion</button>
+<button>Connexion</button>
 </form>
