@@ -10,7 +10,7 @@ import { User } from "src/app/core/interfaces/user";
             <footer>
                 <button [routerLink]="['user', user.id]">Modifier</button>
                 <button 
-                    (click)="removeUser()" 
+                    (onConfirm)="removeUser()" 
                     confirm='Etes vous'
                     [confirmUsername]='user.name'
                 >{{ 'REMOVE' | lang:'en' }}</button>
